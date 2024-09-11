@@ -11,7 +11,10 @@ class Fkart:
         return response.text
 
     def fetch_price(self, user_agent=None):
-        product_price = extract_price_from_html(
-            html_content=self.fetch_html(user_agent)
-        )
+        if user_agent is None:
+            html_content = self.fetch_html()
+        else:
+            html_content = self.fetch_html(user_agent)
+        
+        product_price = extract_price_from_html(html_content)
         return product_price
